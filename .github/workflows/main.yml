@@ -8,10 +8,38 @@ on:
 
 jobs:
   build:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    
-    - name: 
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Lint the code (optional, replace with actual linting if needed)
+      - name: Lint
+        run: echo "No linting setup yet"
+
+      # Step 5: Run tests (optional for now)
+      - name: Test
+        run: echo "No tests yet"
+
+      # Step 6: Create an artifact (package app as a zip)
+      - name: Create artifact
+        run: zip -r app.zip .
+
+      # Step 7: Upload the artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app
+          path: app.zip
